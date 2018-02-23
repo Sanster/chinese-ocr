@@ -2,6 +2,7 @@ import os
 import lmdb  # install lmdb by "pip install lmdb"
 import cv2
 import numpy as np
+import glob
 
 
 # from genLineText import GenTextImage
@@ -78,32 +79,25 @@ def createDataset(outputPath, imagePathList, labelList, lexiconList=None, checkV
     print('Created dataset with %d samples' % nSamples)
 
 
-def read_text(path):
-    with open(path) as f:
-        text = f.read()
-    text = text.strip()
+def getLabel(imPath):
+    return imPath.split(r'/')[-1][:-4].split('_')[1]
 
-    return text
-
-
-import glob
 
 if __name__ == '__main__':
-
     ##lmdb 输出目录
     outputPath = '../data/lmdb/train'
 
-    path = '../data/dataline/*.jpg'
+    path = '../data/images/*.jpg'
     imagePathList = glob.glob(path)
+
     imgLabelLists = []
     for p in imagePathList:
         try:
-            imgLabelLists.append((p, read_text(p.replace('.jpg', '.txt'))))
+            imgLabelLists.append((p, getLabel(p)))
         except:
             continue
 
-    # imgLabelList = [ (p,read_text(p.replace('.jpg','.txt'))) for p in imagePathList]
-    ##sort by lebelList 
+    ##sort by lebelList
     imgLabelList = sorted(imgLabelLists, key=lambda x: len(x[1]))
     imgPaths = [p[0] for p in imgLabelList]
     txtLists = [p[1] for p in imgLabelList]
