@@ -1,6 +1,6 @@
-from ctpn.model import ctpn
-from ctpn.detectors import TextDetector
-from ctpn.other import draw_boxes
+from .ctpn.model import ctpn
+from .ctpn.detectors import TextDetector
+from .ctpn.other import draw_boxes
 import numpy as np
 def text_detect(img):
     scores, boxes,img = ctpn(img)

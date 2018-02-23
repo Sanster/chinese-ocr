@@ -37,7 +37,7 @@ def crnnSource():
     if torch.cuda.is_available() and GPU:
        model = crnn.CRNN(32, 1, len(alphabet)+1, 256, 1).cuda()
     else:
-        model = crnn.CRNN(32, 1, len(alphabet)+1, 256, 1).cpu()
+        model = crnn.CRNN(32, 1, len(alphabet), 256, 1).cpu()
     path = './crnn/samples/model_acc97.pth'
     model.eval()
     model.load_state_dict(torch.load(path))
