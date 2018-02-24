@@ -195,8 +195,8 @@ def read_text_split(p=None, length=4, lineLength=300):
 
         if p is None:
             p = random.choice(crupsPaths)
-        with open(p) as f:
-            data = f.read().decode('utf-8')
+        with open(p, encoding='utf-8') as f:
+            data = f.read()
         data = [line.strip() for line in data.split(u'\n') if line.strip() != u'' and len(line.strip()) > 1]
 
         dataList.extend(data)
@@ -278,21 +278,17 @@ def write_img_text(im, text, root='data/0'):
     txtPath = path + '.txt'
     if len(text) == maxLen or maxLen is None:
         im.save(imgPath)
-        with open(txtPath, 'w') as f:
-            f.write(text.encode('utf-8'))
+        with open(txtPath, 'w', encoding='utf-8') as f:
+            f.write(text)
 
 
 import traceback
 
 
 def get_img_text(angle=(-5, 5), root='data/0', length=10):
-    try:
-        im, boxes, textes, _ = rand_draw(angle, length=length)
-        boxes, textes = merge_line_box(boxes, textes)
-        crop_img(im, boxes, textes, root)
-    except:
-        # traceback.print_exc()
-        pass
+    im, boxes, textes, _ = rand_draw(angle, length=length)
+    boxes, textes = merge_line_box(boxes, textes)
+    crop_img(im, boxes, textes, root)
 
 
 def get_img_char(angle=(-5, 5), root='data/0', length=10):
@@ -304,13 +300,12 @@ def get_img_char(angle=(-5, 5), root='data/0', length=10):
         pass
 
 
-backPaths = glob.glob('./bg_img/*.jpg')  ##背景图像
+backPaths = glob.glob('./bg_img/*.png')  ##背景图像
 fonts = glob.glob('./fonts/*.*')  ##字体集
-crupsPaths = glob.glob('./corups/*/*.txt')  ##语料库
+crupsPaths = glob.glob('./corups/*.txt')  ##语料库
 maxLen = 10  ##每行字符个数
 
 if __name__ == '__main__':
 
-    for i in range(1000):
-        get_img_text(angle=(-0.5, 0.5), root='../imageLine/data/1')
-
+    for i in range(10):
+        get_img_text(angle=(-0.5, 0.5), root='./output')
