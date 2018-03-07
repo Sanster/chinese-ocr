@@ -95,10 +95,10 @@ def model(img,model='keras',adjust=False,detectAngle=False):
             im = im.transpose(Image.ROTATE_270)
         img = np.array(im)
         
-    text_recs,tmp,img = text_detect(img)
+    text_recs,tmp,img,scale = text_detect(img)
     text_recs = sort_box(text_recs)
     result = crnnRec(img,text_recs,model,adjust=adjust)
-    return result,tmp,angle
+    return result,tmp,angle,scale
 
 def sort_box(box):
     """
