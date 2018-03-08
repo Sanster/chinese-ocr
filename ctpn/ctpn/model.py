@@ -26,6 +26,7 @@ def ctpn(img):
     """
     text box detect
     """
+    # TODO: check while need resize_im
     scale, max_scale = Config.SCALE,Config.MAX_SCALE
     img,f = resize_im(img,scale=scale,max_scale=max_scale)
     scores, boxes = test_ctpn(sess, net, img)

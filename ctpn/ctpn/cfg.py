@@ -5,8 +5,8 @@ class Config:
     MEAN=np.float32([102.9801, 115.9465, 122.7717])
     #MEAN=np.float32([100.0, 100.0, 100.0])
     TEST_GPU_ID=0
-    SCALE=900
-    MAX_SCALE=1500
+    SCALE=600
+    MAX_SCALE=1000
     TEXT_PROPOSALS_WIDTH=0
     MIN_RATIO=0.01
     LINE_MIN_SCORE=0.6

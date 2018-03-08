@@ -5,7 +5,6 @@ import time
 from flask import Flask, Response, json, request, g
 import numpy as np
 import cv2
-import jsonpickle
 
 app = Flask(__name__)
 
@@ -43,6 +42,7 @@ def getTextLineBoxes(boxes, scale=1.0):
 
 @app.before_request
 def before_request():
+    print("receive request")
     g.request_start_time = time.time()
 
 

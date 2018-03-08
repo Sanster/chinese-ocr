@@ -4,6 +4,9 @@ from glob import glob
 import numpy as np
 from PIL import Image
 import time
+
+from api import getTextLineBoxes
+
 paths = glob('./test/*.*')
 
 if __name__ == '__main__':
@@ -18,3 +21,11 @@ if __name__ == '__main__':
 
     for key in result:
         print("[{}] {}".format(result[key][0], result[key][1]))
+
+    rois = []
+
+    for key in result:
+        rois.append(result[key][0])
+
+    rois = getTextLineBoxes(rois, scale)
+
